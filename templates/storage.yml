@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nuancier-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      #{% if env == 'staging' %}
+      storage: 10Gi
+      #{% else %}
+      #storage: 20Gi
+      #{% endif %}
+  storageClassName: ""
