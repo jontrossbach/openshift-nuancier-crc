@@ -29,3 +29,7 @@ spec:
   triggers:
   - type: ConfigChange
   - type: ImageChange
+  - type: "GitHub"
+    github:
+      secretReference:
+        name: "gitsecret"
