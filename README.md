@@ -21,9 +21,9 @@ Getting Started Deploying to OpenShift
 Given that you have you openshift environment set up, it is time to start deploying the nuancier application.
 
 Nuancier uses a PostgreSQL database. To have OpenShift spin up one of these for you, do the following command with the parameters adjusted responsibly (e.g. change the password):
-'''
+```
 oc new-app postgresql-persistent --name database --param DATABASE_SERVICE-NAME=database --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param POSTGRESQL_PASSWORD=password
-'''
-Once the database is ready, adjust the alembic.ini and the nuancier.cfg to reflect database's URL. (You may have to expose the database with 'oc expose'.) From there you can start creating all the templates from the templates and files directory with 'oc create'.
+```
+Once the database is ready, adjust the alembic.ini and the nuancier.cfg to reflect database's URL. (You may have to expose the database with `oc expose`.) From there you can start creating all the templates from the templates and files directory with `oc create`.
 
-Once all the requisite files have been created, you will be ready to start your first build which can be done through the console or with the oc tool. When the build finishes nauncier should be accessable after you 'oc expose' it.
+Once all the requisite files have been created, you will be ready to start your first build which can be done through the console or with the oc tool. When the build finishes nauncier should be accessable after you `oc expose` it.
