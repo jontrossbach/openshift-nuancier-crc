@@ -39,4 +39,4 @@ Something to be aware of is that currently the `buildconfig.yml` is set up with 
       secretReference:
         name: "gitsecret"
 ```
-Similarly -- in this case -- you should not run `oc create gitsecret.yml`.
+Similarly – in this case – you should not run `oc create gitsecret.yml`.
