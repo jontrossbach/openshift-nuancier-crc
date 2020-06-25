@@ -27,3 +27,16 @@ oc new-app postgresql-persistent --name database --param DATABASE_SERVICE-NAME=d
 Once the database is ready, adjust the `alembic.ini` and the `nuancier.cfg` to reflect database's new URL. (You may have to expose the database with `oc expose`.) From there you can start creating all the templates from the templates and files directory with `oc create`.
 
 Once all the requisite files have been created, you will be ready to start your first build which can be done through the console or with the oc tool. When the build finishes nauncier should be accessable after you `oc expose` it.
+
+
+Notes
+--------------------
+Something to be aware of is that currently the `buildconfig.yml` is set up with a build trigger using a github webhook. If you're just trying to set up a developement environment this is probably not needed and I recommend you comment out the last four lines of the `buildconfig.yml` which read:
+
+```
+  - type: "GitHub"
+    github:
+      secretReference:
+        name: "gitsecret"
+```
+Similarly -- in this case -- you should not run `oc create gitsecret.yml`.
