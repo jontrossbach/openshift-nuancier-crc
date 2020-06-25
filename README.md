@@ -1,5 +1,6 @@
 # openshift-nuancier-crc
-Setup for deploying nuancier in OpenShift to a local crc environment
+Setup for deploying nuancier in OpenShift development environment
+
 
 Description
 -----------
@@ -13,3 +14,16 @@ The buildconfig.yml in the templates directory currently points my personal fork
 1.  Create an [app.py](https://github.com/jontrossbach/nuancier/blob/nuancier_crc_openshift/app.py) so that s2i has something to recognize as an entrypoint
 1.  Create an [.s2i/environment](https://github.com/jontrossbach/nuancier/blob/nuancier_crc_openshift/.s2i/environment) and set all the required s2i [enviroment variables](https://github.com/sclorg/s2i-python-container/blob/master/3.6/README.md#environment-variables) that you may need.
 1.  Now point the buildconfig.yml from this repo to your personal fork of nunncier and you should be ready for deploying to OpenShift
+
+
+Getting Started Deploying to OpenShift
+--------------------
+Given that you have you openshift environment set up, it is time to start deploying the nuancier application.
+
+Nuancier uses a PostgreSQL database. To have OpenShift spin up one of these for you, do the following command with the parameters adjusted responsibly (e.g. change the password):
+'''
+oc new-app postgresql-persistent --name database --param DATABASE_SERVICE-NAME=database --param POSTGRESQL_DATABASE=sampledb --param POSTGRESQL_USER=username --param POSTGRESQL_PASSWORD=password
+'''
+Once the database is ready, adjust the alembic.ini and the nuancier.cfg to reflect database's URL. (You may have to expose the database with 'oc expose'.) From there you can start creating all the templates from the templates and files directory with 'oc create'.
+
+Once all the requisite files have been created, you will be ready to start your first build which can be done through the console or with the oc tool. When the build finishes nauncier should be accessable after you 'oc expose' it.
